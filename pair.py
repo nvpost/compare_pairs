@@ -1,9 +1,7 @@
 from binance_api import Binance
 import secret
-import requests
 import time
 
-# from sql import sql
 
 
 app_time = time.time()
@@ -25,7 +23,6 @@ print("на", usdt, 'usdt можно купить', originBTCUSDT_Sum, 'BTC')
 
 pt = bot.tickerPrice()
 
-# & x['symbol'].index('USDT') > 0
 USDT_pair = list(filter(lambda x: 'USDT' in x['symbol'] and x['symbol'].index('USDT') > 0, pt))
 BTC_pair = list(filter(lambda x: 'BTC' in x['symbol'] and x['symbol'].index('BTC') > 0, pt))
 
@@ -70,6 +67,7 @@ for pair in compareBTC_USDT:
     btc_sum = float(pair['btc']['sum'])
     usdt_sum = float(pair['usdt']['sum'])
 
+    # Проверка на положительную маржу
     if btc_sum>usdt_sum:
         diff = btc_sum-usdt_sum
         diffInUSDT = diffInUSDTfoo(pair['btc']['coin'])
