@@ -83,7 +83,7 @@ for pair in compareBTC_USDT:
                'diff': diff,
                'diffInUSDT': diffInUSDT*diff,
                'sellForUSDT': diffInUSDT*btc_sum,
-               'margin': margin
+               'margin': round(margin, 2)
                }
         # print(row)
         difference_BTC_pairs.append(row)
