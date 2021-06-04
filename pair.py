@@ -60,9 +60,7 @@ for bs in btc_suppose:
 
 def diffInUSDTfoo(coin):
     pair_price = list(filter(lambda x: x['symbol'] == coin+"USDT", pt))
-    print(pair_price)
     usdt_diff = float(pair_price[0]['price'])
-    # print(usdt_diff)
     return usdt_diff
 
 
@@ -74,16 +72,27 @@ for pair in compareBTC_USDT:
 
     if btc_sum>usdt_sum:
         diff = btc_sum-usdt_sum
-        diffInUSDT = diffInUSDTfoo(pair['btc']['coin'])*diff
-        row = {'coin': pair['btc']['coin'], 'btc_sum':btc_sum, 'ustd_sum':usdt_sum, 'diff': diff, 'diffInUSDT':diffInUSDT}
-        print(row)
+        diffInUSDT = diffInUSDTfoo(pair['btc']['coin'])
+
+        margin = diffInUSDT*btc_sum - usdt
+
+
+        row = {'coin': pair['btc']['coin'],
+               'btc_sum':btc_sum,
+               'ustd_sum':usdt_sum,
+               'diff': diff,
+               'diffInUSDT': diffInUSDT*diff,
+               'sellForUSDT': diffInUSDT*btc_sum,
+               'margin': margin
+               }
+        # print(row)
         difference_BTC_pairs.append(row)
 
 # Разница в USDT* начальный капитал
 
 
-# for p in difference_BTC_pairs:
-#     print(p)
+for p in difference_BTC_pairs:
+    print(p)
 
 
 app_time = time.time() - app_time
