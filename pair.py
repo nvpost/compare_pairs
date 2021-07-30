@@ -90,7 +90,8 @@ for pair in compareBTC_USDT:
 
 
 for p in difference_BTC_pairs:
-    print(p)
+    if p['margin']>3:
+        print(p)
 
 
 app_time = time.time() - app_time
